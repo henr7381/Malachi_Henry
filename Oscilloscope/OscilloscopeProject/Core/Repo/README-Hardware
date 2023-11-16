@@ -1,0 +1,166 @@
+Project = Oscilloscope 
+
+License in file LICENSE.TXT
+
+===================- To Do -===============================
+Francesca = ADC
+
+Goal 1 = post 16-bit value to queue, periodically. 
+Optional - convert to millivolts to make debugging easier. 
+Since this will not be used in the final product, it can use floating-point math 
+(which is slow, but fine for debugging). You must use Timer-16 to set the period.
+
+Malachi = Connections
+
+Goal 1 = one object that gets raw from queue and converts it to a percentage of max +
+Goal 2 = an object that gets percentage and converts it to pixel-vertical.
+Goal 3 = Hardware. Wire the display to the Nucleo using an agreed patter and writing a formal procedure 
+to tell me how your mates can quickly check that the wiring is OK (not modified by accident or prank)
+
+Nathan = Display
+
+Software = Initialize display so that it flickers once and it shows only one pixel in black.
+Salt-and-pepper is a promising 80%-done point -- usually means a wiring error, sometimes means a timing error.
+
+
+Logan = Cursor
+
+Use a third click knob to add a cursor function and output the selected voltage in the bottom word of the screen
+
+
+----------------- Phase 2 -------------------------------------
+
+MATE A (Malachi): Knobs, time-scale, and memory checks.
+
+-Collect (and debounce) data from TWO knobs ==> drive a two-digit count object (each).
+Use the data from one of the 2-digit counters to adjust the period of Timer-16 and thus 
+the sample-collection rate from the ADC. You must decide the range of times to plot given 
+the quickest sampling rate available (for the quick limit) and the patience of a viewer 
+(on the slow limit).
+
+-Write the ram_health() function to comply with JPL rule for "memory barrier".
+
+
+MATE B (Francesca) : Design the data-store-object, which should have a trigger-level attribute. One of the two knob objects sets the trigger threshold.
+
+How an oscilloscope trigger works:
+
+-A trigger level is a voltage.
+
+-The ADC collect and enqueues data, but the data-store object discards a lot of it instead of begin recorded.
+
+-Throw away data until you get TWO successive readings from ADC readings below the trigger-level, followed 
+by TWO above the threshold. Keep thse 4 values and the next 96, too. Store the readings into an array.
+
+How a data-store works:
+
+The stat store is two "buffer" arrays (100 16-bit signed integers, each) as attributes
+Always, one of the buffers is in read-mode and the other will be in write mode.
+One attribute tells us which buffer is currently READABLE and which one is WRITABLE.
+The read-mode buffer is partly full of data from the trigger system.
+The write mode buffer is talking to the display.
+
+MATE C (Nathan) : Draw a diagonal line across the face of the display - 1 dark pixel in each vertical 
+column. Your line can slant either upward or downward left-to-right -- either is OK.
+
+	
+=======================- Malachi Addition -=============================
+
+
+		Spi1
+--------------------
+SCK - PA1 - CN7-30
+NSS - PA4 - CN7-32
+MOSI - PA7 - CN10-15
+CMD - PD4 - CN7-15
+
+
+
+	  					DOGS10
+------------------------------------------------------
+Pin   		Symbol    		Function
+15 			VLCD  			Power LC Drive
+16 			VB1-			Voltage Converter
+17 			VB0- 			Voltage Converter
+18 			VB0+ 			Voltage Converter
+19 			VB1+ 			Voltage Converter
+20 			VSS 			Power Supply 0V (GND)
+21 			VSS 			Power Supply 0V (GND)
+22 			VDD2/3 			Power Supply +2,5..3,3V
+23 			VDD1 			Power Supply +2,5..3,3V
+24 			SDA 			Data in (SPI: MOSI)
+25 			SCK 			Clock (SPI: CLK)
+26 			CD 				L= Command, H= Data
+27 			RST 			Reset (active low)
+28 			CS0 			Chip Select (active low)
+
+
+	  Knob 1
+--------------------
+    /    |    \
+   |     |     |
+CN7-1 CN7-20 CN7-3
+PC10   GND   PC12
+
+- In .IOC, rename pin PC10 to: Quad_1_PC10
+- In .IOC, rename pin PC12 to: Quad_1_PC12
+
+	  Knob 2
+--------------------
+    /    |    \
+   |     |     |
+CN7-35 CN7-22 CN7-37
+PC2    GND   PC3
+
+
+- In .IOC, rename pin PC2 to: Quad_2_PC2
+- In .IOC, rename pin PC3 to: Quad_2_PC3
+
+
+
+   Nucleo Board               			Display
+-----------------------------------------------------------------
+SCK - PA1 - CN7-30			25 - SCK - Clock (SPI: CLK)
+NSS - PA4 - CN7-32			28 - CS0 - Chip Select (active low)
+MOSI - PA7 - CN10-15		24 - SDA - Data in (SPI: MOSI)	
+CMD - PD4 - CN7-15			26 - CD  - L= Command, H= Data
+
+
+
+---------- Wiring check guide ----------
+To ensure connections are sound, ensure that the switches are placed 
+into the breadboard in the correct orientation such that the pins are
+not tied together. Ensure the screen is properly seated into it's 
+breadboard, and that the pins for the backlight (the four pins on the
+bottom of the board) are hanging off, as they are not used. The rest
+of the pins should be connected with jumper wires to each of their
+corresponding pins on the switches and Nucleo board.
+
+
+
+
+====================== Francesca's Additions ==========================
+
+IN IOC file
+PA0 - ADC_IN0
+PA10- GPIO_OUTPUT (this is just to see the voltages on your computer)
+Activate ADC1 - MODE IN0
+Activate TIM16 - enable global interrupt
+		- prescaler 16, counter period 999
+
+IN main.c - in USER CODE BEGIN 2
+ HAL_TIM_Base_Start_IT(&htim16);
+ HAL_ADC_Start_IT(&hadc1);
+
+	
+====================== Nathan's Additions ==========================
+IN IOC File
+SPI1
+PA1 - SPI1_SCK
+PA4 - SPI1-NSS
+PA7 - SPI1-MOSI
+
+Mode - Transmit Only Master
+Data Size - 8Bits
+Prescaler - 4
+
