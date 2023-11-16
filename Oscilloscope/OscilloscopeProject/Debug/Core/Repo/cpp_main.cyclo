@@ -1,0 +1,5 @@
+../Core/Repo/cpp_main.cpp:50:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	3
+../Core/Repo/cpp_main.cpp:65:6:void do_cpp_loop()	1
+../Core/Repo/cpp_main.cpp:113:1:void __static_initialization_and_destruction_0(int, int)	5
+../Core/Repo/cpp_main.cpp:113:1:cpp)	1
+../Core/Repo/cpp_main.cpp:113:1:cpp)	1

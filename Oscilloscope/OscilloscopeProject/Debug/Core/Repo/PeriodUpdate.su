@@ -1,0 +1,4 @@
+../Core/Repo/PeriodUpdate.cpp:17:1:PeriodUpdater::PeriodUpdater(Knob_FSM*)	16	static
+../Core/Repo/PeriodUpdate.cpp:23:1:PeriodUpdater::~PeriodUpdater()	16	static
+../Core/Repo/PeriodUpdate.cpp:23:1:virtual PeriodUpdater::~PeriodUpdater()	16	static
+../Core/Repo/PeriodUpdate.cpp:27:6:void PeriodUpdater::updatePeriod()	16	static

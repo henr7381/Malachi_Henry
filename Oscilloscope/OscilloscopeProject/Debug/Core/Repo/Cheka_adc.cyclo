@@ -1,0 +1,2 @@
+../Core/Repo/Cheka_adc.cpp:27:1:Convert_ADC::Convert_ADC(Sean_queue*)	1
+../Core/Repo/Cheka_adc.cpp:34:6:void Convert_ADC::get_ADC_VAL()	2

@@ -1,0 +1,4 @@
+../Core/Repo/TriggerUpdate.cpp:13:1:TriggerUpdater::TriggerUpdater(Knob_FSM*, DataStore*)	24	static
+../Core/Repo/TriggerUpdate.cpp:20:1:TriggerUpdater::~TriggerUpdater()	16	static
+../Core/Repo/TriggerUpdate.cpp:20:1:virtual TriggerUpdater::~TriggerUpdater()	16	static
+../Core/Repo/TriggerUpdate.cpp:24:6:void TriggerUpdater::updateTrigger()	24	static

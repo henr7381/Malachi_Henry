@@ -1,0 +1,10 @@
+../Core/Repo/Display.cpp:16:1:Display::Display(Mal_queue*)	24	static
+../Core/Repo/Display.cpp:37:6:void Display::sendCommand(uint8_t)	16	static
+../Core/Repo/Display.cpp:45:6:void Display::sendData(uint8_t*)	16	static
+../Core/Repo/Display.cpp:53:6:void Display::init()	24	static
+../Core/Repo/Display.cpp:63:6:void Display::displayOff()	16	static
+../Core/Repo/Display.cpp:70:6:void Display::displayOn()	16	static
+../Core/Repo/Display.cpp:77:6:void Display::clearFramebuffer()	16	static
+../Core/Repo/Display.cpp:85:6:void Display::clearSRAM()	24	static
+../Core/Repo/Display.cpp:112:6:void Display::drawVoltage()	40	static
+../Core/Repo/Display.cpp:144:6:void Display::CheckForData()	40	static

@@ -1,0 +1,6 @@
+../Core/Repo/Edgedetector.cpp:12:1:Edge_detector::Edge_detector()	1
+../Core/Repo/Edgedetector.cpp:18:1:Edge_detector::~Edge_detector()	1
+../Core/Repo/Edgedetector.cpp:18:1:virtual Edge_detector::~Edge_detector()	1
+../Core/Repo/Edgedetector.cpp:22:1:Edge_detector::Edge_detector(const Edge_detector&)	1
+../Core/Repo/Edgedetector.cpp:29:6:void Edge_detector::config_pinout(GPIO_TypeDef*, uint16_t)	1
+../Core/Repo/Edgedetector.cpp:35:12:Edge_sense Edge_detector::update()	11

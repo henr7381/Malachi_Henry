@@ -1,0 +1,4 @@
+../Core/Repo/RawToPixel.cpp:17:1:rawDataToPixelConverter::rawDataToPixelConverter(Sean_queue*, Mal_queue*)	1
+../Core/Repo/RawToPixel.cpp:30:1:rawDataToPixelConverter::~rawDataToPixelConverter()	1
+../Core/Repo/RawToPixel.cpp:30:1:virtual rawDataToPixelConverter::~rawDataToPixelConverter()	1
+../Core/Repo/RawToPixel.cpp:35:6:void rawDataToPixelConverter::rawDataToPixel()	4
