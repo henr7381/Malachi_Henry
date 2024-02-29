@@ -1,3 +1,0 @@
-https://inst.eecs.berkeley.edu/~cs61c/resources/MIPS_help.html
-Computer Architecture - A Quantitative Approach
-Rapid Prototyping of Digital Systems - A Tutorial Approach
