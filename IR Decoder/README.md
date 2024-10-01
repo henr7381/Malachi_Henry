@@ -1,0 +1,3 @@
+This is an IR decoder that will take input from any NEC IR based remote and display the HEX address and payload of the packet. 
+
+I have included the code and KiCAD circuit schematic in case you want to build it yourself. It is pretty cool, and was a good way to strech my legs and write some embedded code and get some circuit design done. There are configuration notes in the code so make sure to check that out. If you use a different STM uC you'll have to recalculate timer values and swap header files. This was designed to work with STM32CUBEIDE, so I have included the main.c file for reference. 
